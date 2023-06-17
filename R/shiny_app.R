@@ -1,5 +1,5 @@
 # try to make a shiny app that helps with
-
+library(maps)
 ui <- fluidPage(
 
   # Application title
@@ -8,13 +8,14 @@ ui <- fluidPage(
   # Sidebar with a slider input for number of bins
   sidebarLayout(
     sidebarPanel(
-       sliderInput("Year",
-                   "Year:",
-                   min = 2008,
-                   max = 2019,
-                   step = 1,
-                   sep = ",",
-                   value = 2008),
+      selectInput("state", "Beer production by", choices = NULL, multiple = T)
+#      sliderInput("Year",
+#                   "Year:",
+#                   min = 2008,
+#                   max = 2019,
+#                   step = 1,
+#                   sep = ",",
+#                   value = 2008),
 
     ),
 
@@ -27,7 +28,11 @@ ui <- fluidPage(
 
 
 
-server <- function(input, output) {
+server <- function(input, output, session) {
+  get_data <- reactive({
+    req()
+    read.csv(input$my_csv$datapath, header = TRUE)
+  })
 
   # output$distPlot <- renderPlot({
   #    # generate bins based on input$bins from ui.R
@@ -39,6 +44,9 @@ server <- function(input, output) {
   # })
 
   output$map <- renderLeaflet({
+
+    leaflet(data = mapStates) %>% addTiles(mapStates$names=="alabama") %>%
+      addPolygons(fillColor = topo.colors(10, alpha = NULL), stroke = FALSE)
     # Put three lines of leaflet code here
 
 
