@@ -14,3 +14,9 @@ BugReports: https://github.com/pmoizerv/BeeRs/issues
 Depends: 
     R (>= 2.10)
 LazyData: true
+Imports: 
+    dbplyr,
+    dplyr,
+    leaflet,
+    shiny,
+    tidyr

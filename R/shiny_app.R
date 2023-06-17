@@ -1,14 +1,15 @@
 # try to make a shiny app that helps with
-library(maps)
-ui <- fluidPage(
+usethis::use_package("shiny")
+usethis::use_package("leaflet")
+ui <- shiny::fluidPage(
 
   # Application title
-  titlePanel("World Population Over Time"),
+  shiny::titlePanel("World Population Over Time"),
 
   # Sidebar with a slider input for number of bins
-  sidebarLayout(
-    sidebarPanel(
-      selectInput("state", "Beer production by", choices = NULL, multiple = T)
+  shiny::sidebarLayout(
+    shiny::sidebarPanel(
+      shiny::selectInput("state", "Beer production by", choices = NULL, multiple = T)
 #      sliderInput("Year",
 #                   "Year:",
 #                   min = 2008,
@@ -20,8 +21,8 @@ ui <- fluidPage(
     ),
 
     # Specifies what to put in the main panel
-    mainPanel(
-      leafletOutput("mymap")
+    shiny::mainPanel(
+      leaflet::leafletOutput("mymap")
     )
   )
 )
@@ -29,8 +30,8 @@ ui <- fluidPage(
 
 
 server <- function(input, output, session) {
-  get_data <- reactive({
-    req()
+  get_data <- shiny::reactive({
+    shiny::req()
     read.csv(input$my_csv$datapath, header = TRUE)
   })
 
@@ -43,10 +44,11 @@ server <- function(input, output, session) {
   #    hist(x, breaks = bins, col = 'darkgray', border = 'white')
   # })
 
-  output$map <- renderLeaflet({
+  output$map <- leaflet::renderLeaflet({
 
-    leaflet(data = mapStates) %>% addTiles(mapStates$names=="alabama") %>%
-      addPolygons(fillColor = topo.colors(10, alpha = NULL), stroke = FALSE)
+    leaflet::leaflet(data = mapStates) %>%
+      leaflet::addTiles(mapStates$names=="alabama") %>%
+      leaflet::addPolygons(fillColor = topo.colors(10, alpha = NULL), stroke = FALSE)
     # Put three lines of leaflet code here
 
 
@@ -55,4 +57,4 @@ server <- function(input, output, session) {
 
 }
 
-shinyApp(ui = ui, server = server)
+shiny::shinyApp(ui = ui, server = server)
