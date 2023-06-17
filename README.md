@@ -33,6 +33,8 @@ The data come from Kaggle
 
 - [Beer production per
   state](https://www.kaggle.com/datasets/jessemostipak/beer-production)
+- For the shinyApp
+- Map with filter option by year, state,…
 - [Craft Beers
   Dataset](https://www.kaggle.com/datasets/nickhould/craft-cans)
 - [Beer review](https://www.kaggle.com/datasets/rdoume/beerreviews)
