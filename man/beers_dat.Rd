@@ -5,8 +5,6 @@
 \alias{beers_dat}
 \title{Beers production data}
 \format{
-\subsection{\code{beers_dat}}{
-
 A data frame with 7,240 rows and 60 columns:
 \describe{
 \item{state}{state name}
@@ -16,7 +14,6 @@ A data frame with 7,240 rows and 60 columns:
 \item{BottlesCans}{Volume in L for comsumption in bottles and cans}
 \item{KegsBarrels}{Volume in L for comsumption in Kegs and barrels}
 ...
-}
 }
 }
 \source{
