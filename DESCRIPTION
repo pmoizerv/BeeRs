@@ -20,7 +20,8 @@ Imports:
     stats,
     dplyr,
     utils,
-    tidyr
+    tidyr,
+    ggplot2
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

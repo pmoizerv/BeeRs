@@ -32,6 +32,7 @@ almost <- function(x, N = 0L){
 }
 ###########-------
 usethis::use_package("tidyr")
+usethis::use_package("ggplot2")
 data("beers_dat", envir = environment())
 
 YEARmin <- 2009
