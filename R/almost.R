@@ -30,33 +30,4 @@ almost <- function(x, N = 0L){
     Sys.sleep(7);return(paste("I don't know, let me sleep..."))
   }
 }
-###########-------
-usethis::use_package("tidyr")
-usethis::use_package("ggplot2")
-data("beers_dat", envir = environment())
 
-YEARmin <- 2009
-YEARmax <- 2009
-YEAR <- YEARmin:YEARmax
-COLUMN <- "KegsBarrels"
-NumberBeers <- 0L
-
-
-states_map <- ggplot2::map_data("state")
-
-beers_dat |>
-  tidyr::pivot_longer(4:6, values_to = "Volume", names_to = "Purpose") |>
-  dplyr::filter(year %in% YEAR,
-                Purpose %in% COLUMN,
-                state != "total") |>
-  dplyr::group_by(state, state_full) |>
-  dplyr::summarise(AVG = almost(Volume, N = NumberBeers)) |>
-  dplyr::ungroup() |>
-
-  #dplyr::mutate(AVG = ifelse(AVG == NA, 0, as.numeric(AVG))) |>
-  dplyr::mutate(Total = sum(AVG, na.rm = T),
-                Percent = (AVG/Total) * 100) |>
-
-  ggplot2::ggplot(mapping = ggplot2::aes(map_id = state_full))+
-  ggplot2::geom_map(mapping = ggplot2::aes(fill = Percent), map = states_map) +
-  ggplot2::expand_limits(x = states_map$long, y = states_map$lat)

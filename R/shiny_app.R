@@ -1,16 +1,30 @@
+#' Launch a shiny map
+#'
+#' @param ... Elipses
+#' @param N Number of beers
+#'
+#' @return shiny map
+#' @export
+#'
+
+
+
+shiny_lauch <- function(N = 0,...){
 # try to make a shiny app that helps with
 
 
 usethis::use_package("shiny")
 usethis::use_package("utils")
+usethis::use_package("colourpicker")
+usethis::use_package("ggplot2")
 
-
+states_map<-ggplot2::map_data("state")
 
 ui <- shiny::fluidPage(
 
 
   # Application title
-  shiny::titlePanel("World Population Over Time"),
+  shiny::titlePanel("Beer production by state"),
 
   # Sidebar with a slider input for number of bins
   shiny::sidebarLayout(
@@ -22,8 +36,11 @@ ui <- shiny::fluidPage(
 #                   step = 1,
                    sep = "",
                    value = c(2008,2019)),
-shiny::numericInput("NumberBeers", label = "Number of beers", min = 0, max = 7, step = 1, value = 0),
-  shiny::actionButton()
+shiny::numericInput("NumberBeers", label = "Number of beers", min = 0, max = 7, step = 1, value = N),
+shiny::selectInput("Column", label = "Type of consumption", choices = c("BottlesCans", "Permises", "KegsBarrels"), multiple = T, selected = "Permises"),
+colourpicker::colourInput("Max", label = "Max value", value = "red"),
+colourpicker::colourInput("Min", label = "Min value", value = "blue"),
+  shiny::submitButton()
 
 ),
 
@@ -39,13 +56,14 @@ server <- function(input, output, session) {
 
 
 
-  output$plot_output <- renderPlot({beers_dat |>
+  output$plot_output <- shiny::renderPlot({beers_dat |>
       tidyr::pivot_longer(4:6, values_to = "Volume", names_to = "Purpose") |>
       dplyr::filter(year %in% input$Year[1]:input$Year[2],
-                    Purpose %in% COLUMN,
+                    Purpose %in% input$Column,
                     state != "total") |>
       dplyr::group_by(state, state_full) |>
-      dplyr::summarise(AVG = almost(Volume/1000, N = input$NumberBeers)) |>
+      dplyr::summarise(Volume = sum(Volume, na.rm = T),
+                       AVG = almost(Volume/1000, N = input$NumberBeers)) |>
       dplyr::ungroup() |>
 
       #dplyr::mutate(AVG = ifelse(AVG == NA, 0, as.numeric(AVG))) |>
@@ -59,7 +77,7 @@ server <- function(input, output, session) {
       ggplot2::ggplot(mapping = ggplot2::aes(map_id = state_full))+
       ggplot2::geom_map(mapping = ggplot2::aes(fill = Percent), map = states_map, col = 1) +
       ggplot2::expand_limits(x = states_map$long, y = states_map$lat)+
-      ggplot2::scale_fill_gradient2(high = "red", low = "blue") +
+      ggplot2::scale_fill_gradient2(high = input$Max, low = input$Min, midpoint = 6) +
 
       ggplot2::theme_void() +
       ggplot2::theme(legend.position = "bottom")})
@@ -81,4 +99,5 @@ server <- function(input, output, session) {
 }
 
 shiny::shinyApp(ui = ui, server = server)
+}
 
