@@ -22,7 +22,8 @@ Imports:
     utils,
     tidyr,
     ggplot2,
-    colourpicker
+    colourpicker,
+    usethis
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

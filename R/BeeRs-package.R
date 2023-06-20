@@ -13,5 +13,6 @@
 #' @importFrom stats rnorm
 #' @importFrom stats sd
 #' @importFrom tidyr pivot_longer
+#' @importFrom usethis use_package
 ## usethis namespace: end
 NULL
