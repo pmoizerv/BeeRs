@@ -11,12 +11,12 @@ ui <- shiny::fluidPage(
 
 
   # Application title
-  titlePanel("World Population Over Time"),
+  shiny::titlePanel("World Population Over Time"),
 
   # Sidebar with a slider input for number of bins
-  sidebarLayout(
-    sidebarPanel(
-      selectInput("beer_csv", "Beer production by", choices = NULL, multiple = T)
+  shiny::sidebarLayout(
+    shiny::sidebarPanel(
+      shiny::selectInput("beer_csv", "Beer production by", choices = NULL, multiple = T)
 #      sliderInput("Year",
 #                   "Year:",
 #                   min = 2008,
@@ -28,8 +28,8 @@ ui <- shiny::fluidPage(
     ),
 
     # Specifies what to put in the main panel
-    mainPanel(
-      leafletOutput("mymap")
+    shiny::mainPanel(
+      leaflet::leafletOutput("mymap")
     )
   )
 )
@@ -57,4 +57,4 @@ server <- function(input, output, session) {
 
 }
 
-shinyApp(ui = ui, server = server)
+shiny::shinyApp(ui = ui, server = server)

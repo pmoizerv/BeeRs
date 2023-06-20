@@ -2,20 +2,22 @@
 % Please edit documentation in R/std_err.R
 \name{std_err}
 \alias{std_err}
-\title{Standard error}
+\title{Standard error based on almost instead of mean}
 \usage{
-std_err(x)
+std_err(x, N = 0)
 }
 \arguments{
 \item{x}{A vector of numerical values}
+
+\item{N}{Number of beers}
 }
 \value{
 A value corresponding to the standard error
 }
 \description{
-Standard error
+Standard error based on almost instead of mean
 }
 \examples{
 x <- c(2, 1, 5, 3, 5)
-std_err(x)
+std_err(x, N = 0L)
 }
