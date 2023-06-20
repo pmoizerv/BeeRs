@@ -48,7 +48,8 @@ std_err <- function(x, N=0) {
   n <- length(x[!is.na(x)]) # calculate the length of the vector
   if (n > 2) { # <- only compute standard error for vector >= 2
 
-    out <- std_dev(x) / sqrt(n)
+
+    out <- std_dev(x, N) / sqrt(n)
   } else {
     out <- NA
   }

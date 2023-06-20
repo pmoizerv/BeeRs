@@ -4,7 +4,7 @@
 usethis::use_package("shiny")
 usethis::use_package("leaflet")
 usethis::use_package("utils")
-usethis::use_package("grDevices")
+
 
 
 ui <- shiny::fluidPage(
