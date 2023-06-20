@@ -3,7 +3,7 @@
 #' An overview of beers production by state in the USA
 #' Report ...
 #'
-#' @format ## `beers_dat`
+#' @format
 #' A data frame with 7,240 rows and 60 columns:
 #' \describe{
 #'   \item{state}{state name}

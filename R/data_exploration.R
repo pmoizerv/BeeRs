@@ -2,7 +2,7 @@ usethis::use_package("dplyr")
 
 
 
-data("beers_dat")
+data("beers_dat", envir = environment())
 dat <- beers_dat |>
   dplyr::group_by(state, state_full) |>
   dplyr::summarise(Value = mean(Permises)) |>

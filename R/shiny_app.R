@@ -2,7 +2,6 @@
 
 
 usethis::use_package("shiny")
-usethis::use_package("leaflet")
 usethis::use_package("utils")
 
 
@@ -29,7 +28,7 @@ ui <- shiny::fluidPage(
 
     # Specifies what to put in the main panel
     shiny::mainPanel(
-      leaflet::leafletOutput("mymap")
+
     )
   )
 )
