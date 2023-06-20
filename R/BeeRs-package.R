@@ -12,5 +12,6 @@
 #' @importFrom magrittr %>%
 #' @importFrom stats rnorm
 #' @importFrom stats sd
+#' @importFrom tidyr pivot_longer
 ## usethis namespace: end
 NULL
