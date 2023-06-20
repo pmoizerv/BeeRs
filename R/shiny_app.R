@@ -1,6 +1,10 @@
 # try to make a shiny app that helps with
 usethis::use_package("shiny")
 usethis::use_package("leaflet")
+usethis::use_package("utils")
+usethis::use_package("grDevices")
+
+
 ui <- shiny::fluidPage(
 
   # Application title
@@ -32,7 +36,7 @@ ui <- shiny::fluidPage(
 server <- function(input, output, session) {
   get_data <- shiny::reactive({
     shiny::req()
-    read.csv(input$my_csv$datapath, header = TRUE)
+    utils::read.csv(input$my_csv$datapath, header = TRUE)
   })
 
   # output$distPlot <- renderPlot({
@@ -48,7 +52,7 @@ server <- function(input, output, session) {
 
     leaflet::leaflet(data = mapStates) %>%
       leaflet::addTiles(mapStates$names=="alabama") %>%
-      leaflet::addPolygons(fillColor = topo.colors(10, alpha = NULL), stroke = FALSE)
+      leaflet::addPolygons(fillColor = grDevices::topo.colors(10, alpha = NULL), stroke = FALSE)
     # Put three lines of leaflet code here
 
 

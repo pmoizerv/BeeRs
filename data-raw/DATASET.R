@@ -20,3 +20,4 @@ beers_dat <- Beers_production |>
   pivot_wider(names_from = type, values_from = liter) |>
   mutate(state_full = tolower(state_full))
 
+
