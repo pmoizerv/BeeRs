@@ -1,5 +1,6 @@
 # try to make a shiny app that helps with
 library(maps)
+library(shiny)
 ui <- fluidPage(
 
   # Application title
@@ -8,7 +9,7 @@ ui <- fluidPage(
   # Sidebar with a slider input for number of bins
   sidebarLayout(
     sidebarPanel(
-      selectInput("state", "Beer production by", choices = NULL, multiple = T)
+      selectInput("beer_csv", "Beer production by", choices = NULL, multiple = T)
 #      sliderInput("Year",
 #                   "Year:",
 #                   min = 2008,
@@ -30,7 +31,7 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
   get_data <- reactive({
-    req()
+    req(input$beer_csv)
     read.csv(input$my_csv$datapath, header = TRUE)
   })
 
