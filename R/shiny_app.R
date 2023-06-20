@@ -1,7 +1,17 @@
 # try to make a shiny app that helps with
+<<<<<<< HEAD
 library(maps)
 library(shiny)
 ui <- fluidPage(
+=======
+usethis::use_package("shiny")
+usethis::use_package("leaflet")
+usethis::use_package("utils")
+usethis::use_package("grDevices")
+
+
+ui <- shiny::fluidPage(
+>>>>>>> 80f0e7c43f4dd19d8752ab61fe7ccebc0d85b292
 
   # Application title
   titlePanel("World Population Over Time"),
@@ -30,9 +40,15 @@ ui <- fluidPage(
 
 
 server <- function(input, output, session) {
+<<<<<<< HEAD
   get_data <- reactive({
     req(input$beer_csv)
     read.csv(input$my_csv$datapath, header = TRUE)
+=======
+  get_data <- shiny::reactive({
+    shiny::req()
+    utils::read.csv(input$my_csv$datapath, header = TRUE)
+>>>>>>> 80f0e7c43f4dd19d8752ab61fe7ccebc0d85b292
   })
 
   # output$distPlot <- renderPlot({
@@ -46,8 +62,14 @@ server <- function(input, output, session) {
 
   output$map <- renderLeaflet({
 
+<<<<<<< HEAD
     leaflet(data = mapStates) %>% addTiles(mapStates$names=="alabama") %>%
       addPolygons(fillColor = topo.colors(10, alpha = NULL), stroke = FALSE)
+=======
+    leaflet::leaflet(data = mapStates) %>%
+      leaflet::addTiles(mapStates$names=="alabama") %>%
+      leaflet::addPolygons(fillColor = grDevices::topo.colors(10, alpha = NULL), stroke = FALSE)
+>>>>>>> 80f0e7c43f4dd19d8752ab61fe7ccebc0d85b292
     # Put three lines of leaflet code here
 
 

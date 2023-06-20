@@ -1,9 +1,10 @@
 usethis::use_package("dplyr")
 usethis::use_package("tidyr")
+usethis::use_package("utils")
 
 
-Beers_production <- read.csv("/Users/kinlan/Downloads/Beers_Data/beer_states.csv")
-us_state <- read.csv("/Users/kinlan/Downloads/Beers_Data/us_state.csv")
+Beers_production <- utils::read.csv("/Users/kinlan/Downloads/Beers_Data/beer_states.csv")
+us_state <- utils::read.csv("/Users/kinlan/Downloads/Beers_Data/us_state.csv")
 
 ######################################
 beers_dat <- Beers_production |>
