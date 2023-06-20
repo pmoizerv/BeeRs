@@ -1,30 +1,8 @@
 usethis::use_package("dplyr")
-usethis::use_package("tidyr")
-usethis::use_package("utils")
 
 
-Beers_production <- utils::read.csv("/Users/kinlan/Downloads/Beers_Data/beer_states.csv")
-us_state <- utils::read.csv("/Users/kinlan/Downloads/Beers_Data/us_state.csv")
 
-######################################
-beers_dat <- Beers_production |>
-  dplyr::left_join(us_state, by = "state") |>
-  # A barrel of beer for this data is 31 gallons
-  # A gallon is 3.78541 liters
-  dplyr::mutate(barrels = as.double(barrels),
-         gallons = 31 * barrels,
-         liter = 3.78541 * gallons,
-         type = dplyr::case_when(
-           type == "On Premises" ~ "Permises",
-           type == "Bottles and Cans" ~ "BottlesCans",
-           type == "Kegs and Barrels" ~ "KegsBarrels"
-         )) |>
-  dplyr::select(- c(barrels, gallons)) |>
-  tidyr::pivot_wider(names_from = type, values_from = liter) |>
-  dplyr::mutate(state_full = tolower(state_full))
-
-
-##########################################
+data("beers_dat")
 dat <- beers_dat |>
   dplyr::group_by(state, state_full) |>
   dplyr::summarise(Value = mean(Permises)) |>
@@ -38,3 +16,5 @@ dat <- beers_dat |>
 ##  geom_map(aes(fill = Value), map = states_map) +
 #  expand_limits(x = states_map$long, y = states_map$lat)
 ##########
+
+
