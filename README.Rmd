@@ -46,18 +46,24 @@ The data come from Kaggle
 -   [Beer production per state](https://www.kaggle.com/datasets/jessemostipak/beer-production)
   * For the shinyApp
   * Map with filter option by year, state,...
--   [Craft Beers Dataset](https://www.kaggle.com/datasets/nickhould/craft-cans)
--   [Beer review](https://www.kaggle.com/datasets/rdoume/beerreviews)
+
+## Function
+
+The main function is `almost()` that compute the mean with an increased variance with increased beer consumption up to 9 beers, then sleeps...
+
+## Map
+
+Dynamic map showing the the percentage production of beers across the states.
 
 ## Workflow
 
 ```{mermaid}
 flowchart LR
-  A[GitHub repository]  --> B[Get data]
-  B --> C(Process,\nfilter,\ntidy the data)
-  C --> D{Merge the\ndatasets}
-  D --> E[Create beeRs packages]
-  D --> F[Create shiny app]
+  A[GitHub repository, ✅]  --> B[Get data✅]
+  B --> C(Process,\nfilter,\ntidy the data✅)
+  C --> D{Merge the\ndatasets✅}
+  D --> E[Create beeRs packages✅]
+  D --> F[Create shiny app, to do]
   E --> G(Containing tidy and merged dataset)
   F --> H(Showing US map with statistics)
 ```
