@@ -384,6 +384,9 @@ Update plot
 </div>
 </div>
 </div>
+</section>
+<section id="slide-example" class="slide level2">
+<h2>slide example</h2>
 <p>
 <script type="application/shiny-prerendered" data-context="server">
 usethis::use_package("shiny")
@@ -457,10 +460,10 @@ data(beers_dat)
                       subtitle = paste("However with a bit of uncertainty since you chose to make me drink", input$NumberBeers, "beers...")) +
         ggplot2::theme_void() +
         ggplot2::theme(legend.position = "bottom",
-                       legend.key.size = grid::unit(input$NumberBeers+2, 'cm'),
-                       legend.text = ggplot2::element_text(size = (13 + input$NumberBeers)),
+                       legend.key.size = grid::unit((input$NumberBeers)/10+2, 'cm'),
+                       legend.text = ggplot2::element_text(size = (13 + (input$NumberBeers)/5)),
                        legend.title = ggplot2::element_blank(),
-                       title = ggplot2::element_text(size = (17 + input$NumberBeers)))
+                       title = ggplot2::element_text(size = (17 + (input$NumberBeers)/5)))
     }
     else if (input$NumberBeers %in%  8:10) {
 
