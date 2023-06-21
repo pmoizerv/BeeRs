@@ -10,6 +10,10 @@ server: shiny
 
 A study on beer production and consumption effects in the USA. 
 
+<<<<<<< HEAD
+=======
+## Main features
+>>>>>>> 5810cb9dfab18a4ebe1e6c272c92d127b6d4ec7a
 
 ## Main features
 :::{.incremental}
@@ -128,10 +132,10 @@ data(beers_dat)
                       subtitle = paste("However with a bit of uncertainty since you chose to make me drink", input$NumberBeers, "beers...")) +
         ggplot2::theme_void() +
         ggplot2::theme(legend.position = "bottom",
-                       legend.key.size = grid::unit(input$NumberBeers+2, 'cm'),
-                       legend.text = ggplot2::element_text(size = (13 + input$NumberBeers)),
+                       legend.key.size = grid::unit((input$NumberBeers)/10+2, 'cm'),
+                       legend.text = ggplot2::element_text(size = (13 + (input$NumberBeers)/5)),
                        legend.title = ggplot2::element_blank(),
-                       title = ggplot2::element_text(size = (17 + input$NumberBeers)))
+                       title = ggplot2::element_text(size = (17 + (input$NumberBeers)/5)))
     }
     else if (input$NumberBeers %in%  8:10) {
 
@@ -170,6 +174,27 @@ data(beers_dat)
 
 ```
 
+<<<<<<< HEAD
 ## Stuck
 
 ## Thanks
+=======
+## slide example
+```{r}
+
+#| eval: false
+#| echo: true
+#| 
+
+std_err <- function(x, N=0) {
+  n <- length(x[!is.na(x)]) # calculate the length of the vector
+  if (n > 2) { # <- only compute standard error for vector >= 2
+    out <- std_dev(x, N) / sqrt(n)
+  } else {
+    out <- NA
+  }
+  return(out)
+}
+```
+
+>>>>>>> 5810cb9dfab18a4ebe1e6c272c92d127b6d4ec7a
