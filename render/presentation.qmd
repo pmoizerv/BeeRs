@@ -280,4 +280,5 @@ data(beers_dat)
 
 
 ## Thanks! {background-image="presentation_files/BeeRsLogo.png" background-size="30%"}
+Check out [BeeRs](https://github.com/pmoizerv/BeeRs/tree/main)!
 
