@@ -15,9 +15,9 @@ execute:
   echo: false
 ---
 
-
 ## Main features
-:::{.incremental}
+
+::: incremental
 The built package includes:
 
 -   A useful **std_err()** function to get the standard error
@@ -26,9 +26,7 @@ The built package includes:
 -   A shiny app integrated in the current Quarto presentation
 :::
 
-
 ## Functions
-
 
 ```{r}
 #| eval: false
@@ -125,7 +123,7 @@ data("beers_dat")
 head(beers_dat, n = 15) 
 ```
 
-##  Shiny app
+## Shiny app
 
 ```{r}
 #| panel: sidebar
@@ -274,11 +272,11 @@ data(beers_dat)
 ```
 
 ## Outcomes
-- It is hard to break the base-r functions
-- `colourpicker()` works in shiny app but does not work while intergrating it into quarto (or just messing with us)
-- Using `git` is guaranteed fun
 
+-   It is hard to break the base-r functions
+-   `colourpicker()` works in shiny app but does not work while intergrating it into quarto (or just messing with us)
+-   Using `git` is guaranteed fun
 
 ## Thanks! {background-image="presentation_files/BeeRsLogo.png" background-size="30%"}
-Check out [BeeRs](https://github.com/pmoizerv/BeeRs/tree/main)!
 
+Check out [BeeRs](https://github.com/pmoizerv/BeeRs/tree/main)!

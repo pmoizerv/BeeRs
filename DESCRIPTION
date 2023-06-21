@@ -2,8 +2,14 @@ Package: BeeRs
 Title: BeeRs production in USA - interactive visualisation
 Version: 0.0.0.9000
 Authors@R: 
-   person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+  c(person(given = "Panagiotis",
+           family = "Zervakis",
+           email = "panagiotis.zervakis@su.se",
+           role = c("aut", "cre")),
+    person(given = "Kinlan",
+           family = "Jan",
+           email = "kinlan.jan@su.se",
+           role = "ctb"))
 Description: Import the data and Launch a shiny app.
 License: MIT + file LICENSE
 Encoding: UTF-8

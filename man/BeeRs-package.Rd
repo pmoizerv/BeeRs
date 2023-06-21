@@ -17,7 +17,12 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
+\strong{Maintainer}: Panagiotis Zervakis \email{panagiotis.zervakis@su.se}
+
+Other contributors:
+\itemize{
+  \item Kinlan Jan \email{kinlan.jan@su.se} [contributor]
+}
 
 }
 \keyword{internal}
