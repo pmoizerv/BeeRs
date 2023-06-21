@@ -1,14 +1,19 @@
 ---
-title: "BeeRs"
-format: revealjs
+title: "The *BeeRs* package"
+subtitle: "A study on beer production and consumption effects in the USA"
+author: "Kinlan Jan, Panagiotis Zervakis"
+date: today
+format:
+  revealjs:
+    slide-number: true
+    show-slide-number: all
+    theme: blood
+    logo: presentation_files/BeeRsLogo.png
 editor: visual
-image: 
 server: shiny
+execute:
+  echo: false
 ---
-
-## The BeeRs project
-
-A study on beer production and consumption effects in the USA. 
 
 
 ## Main features
@@ -16,13 +21,111 @@ A study on beer production and consumption effects in the USA.
 The built package includes:
 
 -   A useful **std_err()** function to get the standard error
--   An even more useful **almost()** function to **almost()** get our results
+-   An even more useful **almost()** function to `almost(calculate_the_mean)`
+-   Some data from [Kaggle](https://www.kaggle.com/datasets/jessemostipak/beer-production) describing beer production and usage in the USA
 -   A shiny app integrated in the current Quarto presentation
 :::
 
+
 ## Functions
 
-##  Shiny
+
+```{r}
+#| eval: false
+#| echo: true
+#| code-line-numbers: "1|2,3|6,7|9,10|13,14"
+almost <- function(x, N = 0L){
+  if(N == 0){
+    output <- mean(x, na.rm = T)
+    return(output)
+  }
+  if(N > 0 & N <= 7){
+    output <- round(mean(rnorm(500/N, mean(x, na.rm = T), sd = N/3)), digits = 2)
+    return(output)
+  }
+  if(N > 7 & N <= 9){
+    return(paste("after", N, "beers, I am unable to calculate"))
+  }
+  if(N > 9){
+    Sys.sleep(7);return(paste("I don't know, let me sleep..."))
+  }
+}
+```
+
+## It does what we wanted it to do...
+
+```{r}
+library(tidyverse)
+library(BeeRs)
+output_df <- matrix(nrow = 100, ncol = 8)  # Create an empty matrix to store output
+
+vec <- sample(1:100, 200, replace = T)
+for (i in 1:100) {
+  for (j in 1:7) {
+    output_df[i, j] <- almost(vec, N = j)  # Call the function and store the result
+  }
+  output_df[i, 8] <- almost(vec, N=0L)
+}
+
+output_df %>% as.data.frame() %>%
+  dplyr::mutate(Replicate = 1:100)%>%
+  pivot_longer(1:8, names_to = "Beers_number", values_to = "Estimated_mean") %>%
+  dplyr::mutate(Beers_number = dplyr::case_when(Beers_number == "V1" ~ 1,
+                                         Beers_number == "V2" ~ 2,
+                                         Beers_number == "V3" ~ 3,
+                                         Beers_number == "V4" ~ 4,
+                                         Beers_number == "V5" ~ 5,
+                                         Beers_number == "V6" ~ 6,
+                                         Beers_number == "V7" ~ 7,
+                                         Beers_number == "V8" ~ 0)) %>%
+
+  ggplot(aes(x = as.factor(Beers_number), y = Estimated_mean)) +
+  ggplot2::geom_boxplot(col = 1, fill = "yellow", alpha = .2) +
+  ggplot2::geom_jitter(height = 0, width=.2,
+                       col = 1, shape = 21, size = 3) +
+  ggplot2::theme_minimal() +
+  ggplot2::labs(x = "Number of beers",
+                y = "Estimated mean") +
+  ggplot2::coord_fixed(ratio = 3/1)
+```
+
+## 
+
+::: incremental
+We then used the `almost` for different functions.
+
+-   `sum_squared_deviations`
+-   `std_dev`
+-   `std_err`
+:::
+
+```{r}
+#| eval: false
+#| echo: true
+#| code-line-numbers: "1|4"
+std_err <- function(x, N=0) {
+  n <- length(x[!is.na(x)]) # calculate the length of the vector
+  if (n > 2) { # <- only compute standard error for vector >= 2
+    out <- std_dev(x, N) / sqrt(n)
+  } else {
+    out <- NA
+  }
+  return(out)
+}
+```
+
+## Data
+
+```{r}
+#| echo: true
+#| eval: true
+
+library(BeeRs)
+data("beers_dat")
+head(beers_dat, n = 15) 
+```
+
+##  Shiny app
 
 ```{r}
 #| panel: sidebar
@@ -52,7 +155,7 @@ shiny::submitButton(text = "Update plot", icon("refresh"))
 
 ```{r}
 #| panel: fill
-shiny::plotOutput("plot_output",width="900px",height="600px")
+shiny::plotOutput("plot_output",width="800px",height="600px")
 ```
 
 ```{r}
@@ -170,26 +273,11 @@ data(beers_dat)
 
 ```
 
-## Stuck
+## Outcomes
+- It is hard to break the base-r functions
+- `colourpicker()` works in shiny app but does not work while intergrating it into quarto (or just messing with us)
+- Using `git` is guaranteed fun
 
-## Thanks
 
-## slide example
-```{r}
-
-#| eval: false
-#| echo: true
-#| 
-
-std_err <- function(x, N=0) {
-  n <- length(x[!is.na(x)]) # calculate the length of the vector
-  if (n > 2) { # <- only compute standard error for vector >= 2
-    out <- std_dev(x, N) / sqrt(n)
-  } else {
-    out <- NA
-  }
-  return(out)
-}
-```
-
+## Thanks! {background-image="presentation_files/BeeRsLogo.png" background-size="30%"}
 
