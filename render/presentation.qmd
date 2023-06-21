@@ -10,10 +10,6 @@ server: shiny
 
 A study on beer production and consumption effects in the USA. 
 
-<<<<<<< HEAD
-=======
-## Main features
->>>>>>> 5810cb9dfab18a4ebe1e6c272c92d127b6d4ec7a
 
 ## Main features
 :::{.incremental}
@@ -174,11 +170,10 @@ data(beers_dat)
 
 ```
 
-<<<<<<< HEAD
 ## Stuck
 
 ## Thanks
-=======
+
 ## slide example
 ```{r}
 
@@ -197,4 +192,4 @@ std_err <- function(x, N=0) {
 }
 ```
 
->>>>>>> 5810cb9dfab18a4ebe1e6c272c92d127b6d4ec7a
+
