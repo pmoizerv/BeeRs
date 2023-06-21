@@ -16,7 +16,6 @@ When you click the **Render** button a document will be generated that includes:
 -   Content authored with markdown
 -   Output from executable code
 
-
 ## Code
 
 ```{r}
@@ -45,7 +44,6 @@ colourpicker::colourInput("Min", label = "Min value", value = "blue")
 #| panel: fill
 shiny::plotOutput("plot_output",width="900px",height="700px")
 ```
-
 
 ```{r}
 #| context: server

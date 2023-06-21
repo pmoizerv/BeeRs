@@ -36,9 +36,9 @@ shiny::sliderInput("Year",
                    value = c(2008,2019))
 shiny::numericInput("NumberBeers", label = "Number of beers", min = 0, max = 15, step = 1, value = N)
 shiny::selectInput("Column", label = "Type of consumption", choices = c("BottlesCans", "Permises", "KegsBarrels"), multiple = T, selected = "Permises")
-colourInput("Max", label = "Max value", value = "yellow")
-colourInput("Min", label = "Min value", value = "grey")
-shiny::submitButton()
+#colourInput("Max", label = "Max value", value = "yellow")
+#colourInput("Min", label = "Min value", value = "grey")
+shiny::submitButton(text = "Update plot", icon("refresh"))
 
     
 
@@ -46,7 +46,7 @@ shiny::submitButton()
 
 ```{r}
 #| panel: fill
-shiny::plotOutput("plot_output",width="900px",height="700px")
+shiny::plotOutput("plot_output",width="900px",height="600px")
 ```
 
 ```{r}
@@ -85,11 +85,15 @@ data(beers_dat)
           ggplot2::ggplot(mapping = ggplot2::aes(map_id = state_full))+
           ggplot2::geom_map(mapping = ggplot2::aes(fill = Percent), map = states_map, col = 1) +
           ggplot2::expand_limits(x = states_map$long, y = states_map$lat)+
-        ggplot2::scale_fill_gradient2(high = input$Max, low = input$Min, midpoint = 6) +
+        ggplot2::scale_fill_gradient2(high = "red", low = "blue", midpoint = 6) +
         ggplot2::labs(title = paste("Beer production per state (%)" )) +
 
         ggplot2::theme_void() +
-        ggplot2::theme(legend.position = "bottom")
+        ggplot2::theme(legend.position = "bottom",
+                       legend.key.size = grid::unit(2, 'cm'),
+                       legend.text = ggplot2::element_text(size = 13),
+                       legend.title = ggplot2::element_blank(),
+                       title = ggplot2::element_text(size = 17))
     }
     else if (input$NumberBeers %in% 1:7) {
       beers_dat |>
@@ -117,7 +121,11 @@ data(beers_dat)
         ggplot2::labs(title = paste("Beer production per state (%)" ),
                       subtitle = paste("However with a bit of uncertainty since you chose to make me drink", input$NumberBeers, "beers...")) +
         ggplot2::theme_void() +
-        ggplot2::theme(legend.position = "bottom")
+        ggplot2::theme(legend.position = "bottom",
+                       legend.key.size = grid::unit(input$NumberBeers+2, 'cm'),
+                       legend.text = ggplot2::element_text(size = (13 + input$NumberBeers)),
+                       legend.title = ggplot2::element_blank(),
+                       title = ggplot2::element_text(size = (17 + input$NumberBeers)))
     }
     else if (input$NumberBeers %in%  8:10) {
 

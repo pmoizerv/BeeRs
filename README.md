@@ -6,7 +6,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of BeeRs is to explore beer related datasets
+The goal of BeeRs is to explore a beer related dataset
 
 ## Installation
 
@@ -23,8 +23,10 @@ devtools::install_github("pmoizerv/BeeRs")
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
-#library(BeeRs)
-## basic example code
+library(BeeRs)
+x <- c(1,2,3,4,5)
+almost(x, N = 1)
+#> [1] 2.98
 ```
 
 ## Data
@@ -33,18 +35,14 @@ The data come from Kaggle
 
 - [Beer production per
   state](https://www.kaggle.com/datasets/jessemostipak/beer-production)
-- For the shinyApp
-- Map with filter option by year, state,…
+- The data describe the production of beers in USA state from 2008 to
+  2019
 
 ## Function
 
 The main function is `almost()` that compute the mean with an increased
-variance with increased beer consumption up to 9 beers, then sleeps…
-
-## Map
-
-Dynamic map showing the the percentage production of beers across the
-states.
+variance with increased beer consumption up to 7 beers, then is no
+longer able to calculate …
 
 ## Workflow
 
@@ -54,7 +52,6 @@ flowchart LR
   B --> C(Process,\nfilter,\ntidy the data✅)
   C --> D{Merge the\ndatasets✅}
   D --> E[Create beeRs packages✅]
-  D --> F[Create shiny app, to do]
-  E --> G(Containing tidy and merged dataset)
-  F --> H(Showing US map with statistics)
+  D --> F[Create shiny app✅]
+  E --> G(Create the quarto presentation)
 ```
