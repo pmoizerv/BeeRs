@@ -4,6 +4,9 @@
 # BeeRs
 
 <!-- badges: start -->
+
+![](render/presentation_files/BeeRsLogo.png)
+
 <!-- badges: end -->
 
 The goal of BeeRs is to explore a beer related dataset
@@ -26,7 +29,7 @@ This is a basic example which shows you how to solve a common problem:
 library(BeeRs)
 x <- c(1,2,3,4,5)
 almost(x, N = 1)
-#> [1] 2.98
+#> [1] 2.99
 ```
 
 ## Data
@@ -48,10 +51,10 @@ longer able to calculate …
 
 ``` mermaid
 flowchart LR
-  A[GitHub repository, ✅]  --> B[Get data✅]
-  B --> C(Process,\nfilter,\ntidy the data✅)
-  C --> D{Merge the\ndatasets✅}
-  D --> E[Create beeRs packages✅]
-  D --> F[Create shiny app✅]
+  A[GitHub repository]  --> B[Get data]
+  B --> C(Process,\nfilter,\ntidy the data)
+  C --> D{Merge the\ndatasets}
+  D --> E[Create beeRs packages]
+  D --> F[Create shiny app]
   E --> G(Create the quarto presentation)
 ```

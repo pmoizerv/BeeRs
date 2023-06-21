@@ -16,6 +16,9 @@ knitr::opts_chunk$set(
 # BeeRs
 
 <!-- badges: start -->
+
+![](render/presentation_files/BeeRsLogo.png)
+
 <!-- badges: end -->
 
 The goal of BeeRs is to explore a beer related dataset
@@ -39,13 +42,12 @@ x <- c(1,2,3,4,5)
 almost(x, N = 1)
 ```
 
-
 ## Data
 
 The data come from Kaggle
 
 -   [Beer production per state](https://www.kaggle.com/datasets/jessemostipak/beer-production)
-  * The data describe the production of beers in USA state from 2008 to 2019
+-   The data describe the production of beers in USA state from 2008 to 2019
 
 ## Function
 
@@ -55,10 +57,10 @@ The main function is `almost()` that compute the mean with an increased variance
 
 ```{mermaid}
 flowchart LR
-  A[GitHub repository, ✅]  --> B[Get data✅]
-  B --> C(Process,\nfilter,\ntidy the data✅)
-  C --> D{Merge the\ndatasets✅}
-  D --> E[Create beeRs packages✅]
-  D --> F[Create shiny app✅]
+  A[GitHub repository]  --> B[Get data]
+  B --> C(Process,\nfilter,\ntidy the data)
+  C --> D{Merge the\ndatasets}
+  D --> E[Create beeRs packages]
+  D --> F[Create shiny app]
   E --> G(Create the quarto presentation)
 ```
