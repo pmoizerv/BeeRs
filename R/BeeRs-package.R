@@ -2,6 +2,7 @@
 "_PACKAGE"
 
 ## usethis namespace: start
+#' @importFrom colourpicker colourInput
 #' @importFrom dplyr group_by
 #' @importFrom dplyr summarise
 #' @importFrom dplyr ungroup
@@ -14,5 +15,6 @@
 #' @importFrom stats sd
 #' @importFrom tidyr pivot_longer
 #' @importFrom usethis use_package
+#' @importFrom utils globalVariables
 ## usethis namespace: end
 NULL
