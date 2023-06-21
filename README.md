@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-![](render/presentation_files/BeeRsLogo.png)
+![](man/figures/BeeRsLogo.png)
 
 <!-- badges: end -->
 
