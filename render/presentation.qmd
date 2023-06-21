@@ -2,21 +2,27 @@
 title: "BeeRs"
 format: revealjs
 editor: visual
+image: 
 server: shiny
 ---
 
 ## The BeeRs project
 
-A study on beer production and consumption effects in the USA
+A study on beer production and consumption effects in the USA. 
 
-## Bullets
 
-When you click the **Render** button a document will be generated that includes:
+## Main features
+:::{.incremental}
+The built package includes:
 
--   Content authored with markdown
--   Output from executable code
+-   A useful **std_err()** function to get the standard error
+-   An even more useful **almost()** function to **almost()** get our results
+-   A shiny app integrated in the current Quarto presentation
+:::
 
-## Code
+## Functions
+
+##  Shiny
 
 ```{r}
 #| panel: sidebar
@@ -163,3 +169,7 @@ data(beers_dat)
 
 
 ```
+
+## Stuck
+
+## Thanks
