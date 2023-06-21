@@ -1,0 +1,76 @@
+---
+title: "BeeRs"
+format: revealjs
+editor: visual
+server: shiny
+---
+
+## The BeeRs project
+
+A study on beer production and consumption effects in the USA
+
+## Bullets
+
+When you click the **Render** button a document will be generated that includes:
+
+-   Content authored with markdown
+-   Output from executable code
+
+## Code
+
+```{r}
+#| panel: sidebar
+
+N=2
+
+shiny::sliderInput("Year",
+                   "Year:",
+                   min = 2008,
+                   max = 2019,
+#                   step = 1,
+                   sep = "",
+                   value = c(2008,2019))
+shiny::numericInput("NumberBeers", label = "Number of beers", min = 0, max = 7, step = 1, value = N)
+shiny::selectInput("Column", label = "Type of consumption", choices = c("BottlesCans", "Permises", "KegsBarrels"), multiple = T, selected = "Permises")
+colourpicker::colourInput("Max", label = "Max value", value = "red")
+colourpicker::colourInput("Min", label = "Min value", value = "blue")
+  shiny::submitButton()
+
+    
+
+```
+
+```{r}
+#| panel: fill
+shiny::plotOutput("plot_output",width="900px",height="700px")
+```
+
+```{r}
+#| context: server
+library(BeeRs)
+output$plot_output <- shiny::renderPlot({beers_dat |>
+      tidyr::pivot_longer(4:6, values_to = "Volume", names_to = "Purpose") |>
+      dplyr::filter(year %in% input$Year[1]:input$Year[2],
+                    Purpose %in% input$Column,
+                    state != "total") |>
+      dplyr::group_by(state, state_full) |>
+      dplyr::summarise(Volume = sum(Volume, na.rm = T),
+                       AVG = almost(Volume/1000, N = input$NumberBeers)) |>
+      dplyr::ungroup() |>
+
+      #dplyr::mutate(AVG = ifelse(AVG == NA, 0, as.numeric(AVG))) |>
+      dplyr::mutate(Total = sum(AVG, na.rm = T),
+                    Percent = (AVG/Total) * 100,
+                    AlmostPercent = Percent + mean(rnorm(100/(input$NumberBeers + 1), 0, input$NumberBeers)),
+                    AlmostTotal = sum(AlmostPercent, na.rm = T),
+                    Percent = (AlmostPercent/AlmostTotal) * 100) |>
+
+
+      ggplot2::ggplot(mapping = ggplot2::aes(map_id = state_full))+
+      ggplot2::geom_map(mapping = ggplot2::aes(fill = Percent), map = states_map, col = 1) +
+      ggplot2::expand_limits(x = states_map$long, y = states_map$lat)+
+      ggplot2::scale_fill_gradient2(high = input$Max, low = input$Min, midpoint = 6) +
+
+      ggplot2::theme_void() +
+      ggplot2::theme(legend.position = "bottom")})
+```
