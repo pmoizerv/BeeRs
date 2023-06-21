@@ -17,6 +17,7 @@ The built package includes:
 
 -   A useful **std_err()** function to get the standard error
 -   An even more useful **almost()** function to **almost()** get our results
+-   Some data from [Kaggle](https://www.kaggle.com/datasets/jessemostipak/beer-production) describing beer production and usage in the USA
 -   A shiny app integrated in the current Quarto presentation
 :::
 
@@ -81,17 +82,14 @@ output_df %>% as.data.frame() %>%
   ggplot2::coord_fixed(ratio = 3/1)
 ```
 
-
-
 ## 
 
-:::{.incremental}
+::: incremental
 We then used the `almost` for different functions.
 
-- `sum_squared_deviations`
-- `std_dev`
-- `std_err`
-
+-   `sum_squared_deviations`
+-   `std_dev`
+-   `std_err`
 :::
 
 ```{r}
@@ -109,4 +107,13 @@ std_err <- function(x, N=0) {
 }
 ```
 
+## Data
 
+```{r}
+#| echo: true
+#| eval: true
+
+library(BeeRs)
+data("beers_dat")
+head(beers_dat, n = 15) 
+```
