@@ -131,4 +131,5 @@
 
 }
   shiny::shinyApp(ui = ui, server = server)
-
+  # Update this function call
+  utils::globalVariables(c("AVG", "AlmostPercent", "AlmostTotal", "Percent", "Purpose", "Total", "USA", "Volume", "region", "state", "state_full", "year"))
